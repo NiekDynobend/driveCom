@@ -1,5 +1,5 @@
 #include <iostream>
-#include "serial_port.h"
+#include "serial/serial_port.h"
 
 void SerialPort::init()
 {
@@ -48,14 +48,6 @@ bool SerialPort::connect()
             return bSuccess;
         }
 }
-
-BOOL WriteFile(
-    HANDLE       hFile,                   // your hCom
-    LPCVOID      lpBuffer,                // your data pointer
-    DWORD        nNumberOfBytesToWrite,   // len, cast to DWORD
-    LPDWORD      lpNumberOfBytesWritten,  // &written  (Windows fills it in)
-    LPOVERLAPPED lpOverlapped             // nullptr   (no async I/O)
-);
 
 
 bool SerialPort::write(uint8_t*        data, uint8_t len){

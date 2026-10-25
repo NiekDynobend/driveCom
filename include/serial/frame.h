@@ -10,7 +10,7 @@
 //idx 0x700 : heartbeat (both)
 
 #define START_BYTE  0xAAu
-#define CRC 0xFF
+#define SERIAL_CRC 0xFF
 #define DATA_SIZE 8
 #define CAN_DATA_SIZE 13
 

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "frame.h"
+#include "serial/frame.h"
 
 
 bool encodeFrame(const CanFrame* frame, uint8_t* encoded_frame){
@@ -21,7 +21,7 @@ bool encodeFrame(const CanFrame* frame, uint8_t* encoded_frame){
     for(int idx=0; idx<DATA_SIZE; idx++){
         encoded_frame[4+idx] = frame->data[idx];
     }
-    encoded_frame[12] = CRC;
+    encoded_frame[12] = SERIAL_CRC;
     return true;
 }
 
