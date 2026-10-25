@@ -6,7 +6,9 @@
 
 class FrameLink{
     public:
-        FrameLink(){}
+        FrameLink(){
+            serial_port_.connect();
+        }
 
 
         // methods

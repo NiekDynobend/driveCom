@@ -1,7 +1,9 @@
+#include <iostream>
 #include "serial_port.h"
 
 void SerialPort::init()
 {
+    std::cout<<"Init serial port." <<std::endl;
     dcb.DCBlength = sizeof(DCB);
     dcb.BaudRate = 115200;
     dcb.ByteSize = 8;
@@ -17,6 +19,7 @@ void SerialPort::init()
 
 bool SerialPort::connect()
 {
+        std::cout<<"Connect serial port" << std::endl;
         hCom = CreateFile( pcCommPort,
                 GENERIC_READ | GENERIC_WRITE,
                 0,      //  must be opened with exclusive-access
@@ -55,13 +58,6 @@ BOOL WriteFile(
 );
 
 
-
-// Argument	You pass	Why
-// hFile	hCom	which port
-// lpBuffer	data	the bytes. LPCVOID means “pointer to anything const”, so your const uint8_t* fits without a cast
-// nNumberOfBytesToWrite	static_cast<DWORD>(len)	size_t is 64 bits on x64, DWORD is 32, so the cast is explicit
-// lpNumberOfBytesWritten	&written	an out-parameter, the same pattern as your encodeFrame
-// lpOverlapped	nullptr	a plain blocking write
 bool SerialPort::write(uint8_t*        data, uint8_t len){
     if(hCom == INVALID_HANDLE_VALUE || data==NULL){
         return false;
