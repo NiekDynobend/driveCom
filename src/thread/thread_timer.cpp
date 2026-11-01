@@ -1,22 +1,28 @@
-#include "thread/periodic_thread.h"
+#include "thread/thread_timer.h"
 
 
-PeriodicThread::PeriodicThread(
+ThreadTimer::ThreadTimer(
     std::chrono::milliseconds period, 
     std::function<void()> function)
 : period_(period), thread_function_(std::move(function)){}
 
-void PeriodicThread::start(){
+void ThreadTimer::start(){
+    if(thread_.joinable()){
+        return;
+    }
     running_ = true;
+    thread_ = std::thread(&ThreadTimer::run, this);
 }
 
-void PeriodicThread::stop(){
+void ThreadTimer::stop(){
     running_ = false;
-    //if joinable? maybe
+    if(thread_.joinable()){
+        thread_.join();
+    }
     thread_.join();
 }
 
-void PeriodicThread::run(){
+void ThreadTimer::run(){
     auto next = std::chrono::steady_clock::now(); 
 
     while(running_){

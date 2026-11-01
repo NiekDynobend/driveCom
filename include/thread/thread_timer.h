@@ -5,9 +5,9 @@
 #ifndef PERIODIC_THREAD_H
 #define PERIODIC_THREAD_H
 
-class PeriodicThread{
+class ThreadTimer{
     public:
-        PeriodicThread(std::chrono::milliseconds , std::function<void()>){}
+        ThreadTimer(std::chrono::milliseconds , std::function<void()>);
 
         void start();
         void run();
